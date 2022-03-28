@@ -1,0 +1,1 @@
+open the pdf : search for wsc as in wsc{...} and u will find hidden flag.

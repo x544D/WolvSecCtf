@@ -1,0 +1,1 @@
+run a strings scan on it, you will get the flag.

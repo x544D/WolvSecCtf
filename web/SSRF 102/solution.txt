@@ -1,0 +1,21 @@
+This is litterallt the same as SSRF 101, With one diffrence which is : filtering!
+
+Whta we should bypass is this part of the code :
+
+```
+ 	const normalizedPath = path.normalize('NFKC')
+        const firstPathChar = normalizedPath.charAt(0)
+        
+	if ('0' <= firstPathChar && firstPathChar <= '9') {
+            res.send('first chararacter of path must not normalize to a digit')
+        }
+```
+
+so calling /ssrf?path=1/flag , as we did before in SSRF 101 won't work since 1 is number!
+hm , normalize ? NFKC ? well well i smell a \n !!!
+
+calling ssrf?path=%0a1/flag  did the trick and we got our flag.
+
+
+
+by x544D

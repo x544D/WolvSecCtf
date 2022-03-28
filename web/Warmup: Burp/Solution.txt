@@ -1,0 +1,11 @@
+visiting : https://burp-bvel4oasra-uc.a.run.app
+will redirect to /?count=1 ->[redirectes]-> /?count=2 .... /flag?count=1 -> /?count=7 ... till /?count=11 and then goes to a random youtube video.
+
+
+So that /flag?.. was Suspecious , Went to /flag , response was : 
+ - You have to be authenticated to see content.<!--XXXX-->
+
+Checked cookies , there is PASSWORD=NONE , changed that to XXXX and done!
+
+
+by x544D. 
